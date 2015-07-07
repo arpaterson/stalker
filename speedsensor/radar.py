@@ -264,7 +264,10 @@ class radar(radardata,radarcommon,radarconfig):
 
 	 #unpack  faster target speed	 
 	 if not buf[2:6] == '    ':
-	  self.report.fasterspeed = int(buf[2:6]) / 10
+	  fasterspeed = int(buf[2:6])
+	  if not buf[5] == ' ':
+	   fasterspeed = fasterspeed /10
+	  self.report.fasterspeed = fasterspeed
 	 else:
 	  self.report.fasterspeed = NaN
 
@@ -282,7 +285,10 @@ class radar(radardata,radarcommon,radarconfig):
 
 	 #unpack strongest target speed	 
 	 if not buf[7:11] == '    ':
-	  self.report.strongspeed = int(buf[7:11]) / 10
+	  strongspeed = int(buf[7:11])
+	  if not buf[10] == ' ':
+	   strongspeed = strongspeed / 10	  
+	  self.report.strongspeed = strongspeed
 	 else:
 	  self.report.strongspeed = NaN
 

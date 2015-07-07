@@ -1,10 +1,13 @@
-buf = (	'\x81' 			# Message Type 'B'
-	+ chr(0b01010011) 	# Status 1, No lock, Same/Both, fork mode off, transmitter on
-	+ chr(0b01000100) 	# Status 2, No fast speed locked, faster enabled, no low volt
-	+ '\x31\x31\x31' 	# Patrol Speed, 111
-	+ '\x32\x32\x32' 	# Locked Speed, 222
-	+ '\x33\x33\x33' 	# Faster speed, 333
-	+ '\x34\x34\x34' 	# Target speed, 444
-	+ '\x0D'		# Carriage return
+Sbuf = (	'\x83' 			# Message Type 'S'
+	+ 'C'			#fasterspeeddir closing
+	+ ' 40 '		#fasterspeed 40kph (ones not enabled)
+	+ 'C'			#strongspeeddir closing
+	+ ' 45 '		#strongspeed
+	+ ' 20'			#strongspeed strength
+	+ ' 10'			#ch sig strength ratio
+	+ '@'			#status 01000000 fork mode disabled
 	)
+
+Sstr1 = '▒C    C 43   1  1@'
+Sstr2 = '▒C    C 10   9 20@'
 

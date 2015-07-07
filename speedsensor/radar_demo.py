@@ -27,7 +27,8 @@ class radarPoller(threading.Thread):
 	 #Send config string:
 	 radarObj.setMethod(2) #set  method set)
 	 radarObj.setCommand(30) #set output format
-	 radarObj.setValue(4) #s format
+	 #radarObj.setValue(3) #B format
+	 radarObj.setValue(4) #S format
 	 radarObj.send(radarObj.getMessage())
 	 #Start dealing with data
          while self.running:
@@ -38,13 +39,15 @@ class radarPoller(threading.Thread):
 
 #demo program
 if __name__=="__main__":
+	os.chdir('/var/www/logs')
         rp = radarPoller()
         try:
 	 unitname = os.uname()[1]
 	 starttime = time.strftime("%Y%m%d-%H%M%S")
 	 filename = unitname + '_' + starttime + '_log_radar.csv'
-	 fid = io.open(filename,'w')
-	 fid.write(u'utc, valid, patrol speed, locked speed, faster speed,target speed, strong speed, strong direction, strong strength, ch sig str ratio, patrol dir, locked dir, faster dir, target dir, test result, units, strong lock, fast lock, mode, lock status, zone, forkmode, tx status, fastlock status, fast lock mode, voltage status\r\n')
+	 bufsize = 1
+	 fid = io.open(filename,'w',bufsize)
+	 fid.write(u'utc, valid, patrol speed, locked speed, faster speed, target speed, strong speed, strong direction, strong strength, ch sig str ratio, patrol dir, locked dir, faster dir, target dir, test result, units, strong lock, fast lock, mode, lock status, zone, forkmode, tx status, fastlock status, fast lock mode, voltage status\r\n')
          rp.start()
          while True:
 #          os.system('clear')

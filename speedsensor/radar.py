@@ -251,7 +251,7 @@ class radar(radardata,radarcommon,radarconfig):
 	  return -1
 	 
 	 #unpack  faster target direction
-	 if not buf[1] == ' ':
+	 if buf[1] != ' ':
 	  if buf[1] == 'A':
 	   self.report.fasterspeeddir = DIR_AWAY
 	  elif buf[1] == 'C':
@@ -263,16 +263,16 @@ class radar(radardata,radarcommon,radarconfig):
 	  self.report.fasterspeeddir = NaN
 
 	 #unpack  faster target speed	 
-	 if not buf[2:6] == '    ':
+	 if buf[2:6] != '    ':
 	  fasterspeed = int(buf[2:6])
-	  if not buf[5] == ' ':
+	  if buf[5] != ' ':
 	   fasterspeed = fasterspeed /10
 	  self.report.fasterspeed = fasterspeed
 	 else:
 	  self.report.fasterspeed = NaN
 
 	 #unpack  strongest target direction
-	 if not buf[6] == ' ':
+	 if buf[6] != ' ':
 	  if buf[6] == 'A':
 	   self.report.strongspeeddir = DIR_AWAY
 	  elif buf[6] == 'C':
@@ -284,22 +284,22 @@ class radar(radardata,radarcommon,radarconfig):
 	  self.report.strongspeeddir = NaN
 
 	 #unpack strongest target speed	 
-	 if not buf[7:11] == '    ':
+	 if buf[7:11] != '    ':
 	  strongspeed = int(buf[7:11])
-	  if not buf[10] == ' ':
+	  if buf[10] != ' ':
 	   strongspeed = strongspeed / 10	  
 	  self.report.strongspeed = strongspeed
 	 else:
 	  self.report.strongspeed = NaN
 
 	 #unpack strongest target strength
-	 if not buf[11:14] == '   ':
+	 if buf[11:14] != '   ':
 	  self.report.strongstrength = int(buf[11:14])
 	 else:
 	  self.report.strongstrength = NaN
 
 	 #unpack  channel signal strength ratio
-	 if not buf[14:17] == '   ':
+	 if buf[14:17] != '   ':
 	  self.report.channelsignalstrengthratio = int(buf[14:17])
 	 else:
 	  self.report.channelsignalstrengthratio = NaN

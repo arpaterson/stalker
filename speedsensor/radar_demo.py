@@ -17,19 +17,50 @@ class radarPoller(threading.Thread):
         def __init__(self):
          threading.Thread.__init__(self)
          global radarObj #bring it in scope
-         radarObj = radar.radar("/dev/ttyUSB0",9600,8,'N',1,0) #that last argument enable verbose mode
+         radarObj = radar.radar("/dev/ttyUSB0",9600,8,'N',1,1) #that last argument enable verbose mode
 	 print("radarObj created")
          self.curent_value = None
          self.running = True
 	
         def run(self):
          global radarObj
+
 	 #Send config string:
+
+	 radarObj.setMethod(2) #set  method set)
+	 radarObj.setCommand(1) #set mode
+	 radarObj.setValue(0) #stationary mode
+	 #radarObj.setValue(1) #moving mode
+	 radarObj.send(radarObj.getMessage())
+	 time.sleep(1)
+
+	 radarObj.setMethod(2) #set  method set)
+	 radarObj.setCommand(2) #set zone
+	 #radarObj.setValue(0) #same/away direction (stationary or moving mode)
+	 #radarObj.setValue(1) #opp/closing direction (stationary or moving mode)
+	 radarObj.setValue(2) #both (stationary mode only)
+	 radarObj.send(radarObj.getMessage())
+	 time.sleep(1)
+
+	 radarObj.setMethod(2) #set  method set)
+	 radarObj.setCommand(20) #set units
+	 radarObj.setValue(1) #kph
+	 radarObj.send(radarObj.getMessage())
+	 time.sleep(1)
+
+	 radarObj.setMethod(2) #set  method set)
+	 radarObj.setCommand(21) #set unit res
+	 radarObj.setValue(0) #ones
+	 radarObj.send(radarObj.getMessage())
+	 time.sleep(1)
+
 	 radarObj.setMethod(2) #set  method set)
 	 radarObj.setCommand(30) #set output format
 	 #radarObj.setValue(3) #B format
 	 radarObj.setValue(4) #S format
 	 radarObj.send(radarObj.getMessage())
+	 time.sleep(1)
+ 
 	 #Start dealing with data
          while self.running:
           radarObj.next()

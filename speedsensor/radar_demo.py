@@ -29,16 +29,16 @@ class radarPoller(threading.Thread):
 
 	 radarObj.setMethod(2) #set  method set)
 	 radarObj.setCommand(1) #set mode
-	 #radarObj.setValue(0) #stationary mode
-	 radarObj.setValue(1) #moving mode
+	 radarObj.setValue(0) #stationary mode
+	 #radarObj.setValue(1) #moving mode
 	 radarObj.send(radarObj.getMessage())
 	 time.sleep(1)
 
 	 radarObj.setMethod(2) #set  method set)
 	 radarObj.setCommand(2) #set zone
 	 #radarObj.setValue(0) #same/away direction (stationary or moving mode)
-	 radarObj.setValue(1) #opp/closing direction (stationary or moving mode)
-	 #radarObj.setValue(2) #both (stationary mode only)
+	 #radarObj.setValue(1) #opp/closing direction (stationary or moving mode)
+	 radarObj.setValue(2) #both (stationary mode only)
 	 radarObj.send(radarObj.getMessage())
 	 time.sleep(1)
 
@@ -56,8 +56,8 @@ class radarPoller(threading.Thread):
 
 	 radarObj.setMethod(2) #set  method set)
 	 radarObj.setCommand(30) #set output format
-	 radarObj.setValue(3) #B format
-	 #radarObj.setValue(4) #S format
+	 #radarObj.setValue(3) #B format
+	 radarObj.setValue(4) #S format
 	 radarObj.send(radarObj.getMessage())
 	 time.sleep(1)
  
